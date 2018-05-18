@@ -1,0 +1,49 @@
+{% extends "recipe/layout.html" %}
+
+{% block content %}
+  <div class="row">
+  <div class="col-md-8 offset-md-2">
+    <h1>List of Recipes <a class="btn btn-success btn-sm" href="{% url 'create' %}"><i class="fa fa-plus"></i> Create Recipe</a></h1>
+    <hr>
+    {% if recipes %}
+    {% for recipe  in recipes %}
+        <div class="row">
+          <div class="col-md-4">
+            <img width="100px" height="100px" class="img img-fluid" src="{{ recipe.image.url }}">
+          </div>
+          <div class="col-md-8">
+            <a href="{% url 'show' recipe.id %}"><b><h5 style="margin-bottom: 0px;">{{ recipe.title }}</h5></b></a>
+            <p style="margin-bottom: 0px;"><i class="fa fa-star"></i>
+                                           <i class="fa fa-star"></i>
+                                           <i class="fa fa-star"></i>
+                                           <i class="fa fa-star-o"></i>
+                                           <i class="fa fa-star-o"></i></p>
+            {% if recipe.prep_time %}
+                <b>Prep Time: </b>{{ recipe.prep_time }}
+            {% endif %}
+            {% if recipe.cooking_time %}
+                <b>Cooking Time: </b>{{ recipe.cooking_time }}
+            {% endif %}
+                <b>Serves/kg: </b> {{ recipe.serves }}
+          </div>
+        </div><hr>
+
+    {% endfor %}
+    {% else %}
+    <div class="card card-fluid">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">
+            <img width="40px" height="40px" class="img img-fluid" src="static/tumi.png">
+          </div>
+          <div class="col-md-8">
+            <h4>No recipes posted yet</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+{% endblock %}

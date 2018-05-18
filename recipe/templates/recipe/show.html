@@ -1,0 +1,65 @@
+{% extends "recipe/layout.html" %}
+
+{% block content %}
+  <div class="row">
+  <div col-md-12>
+
+        <div class="row">
+          <div class="col-md-4">
+            <img width="100px" height="100px" class="img img-fluid" src="{{ recipe.image.url }}">
+          </div>
+          <div class="col-md-8">
+            <a href=""><b><h5 style="margin-bottom: 0px;">{{ recipe.title }}</h5></b></a>
+            <p style="margin-bottom: 0px;"><i class="fa fa-star"></i>
+                                           <i class="fa fa-star"></i>
+                                           <i class="fa fa-star"></i>
+                                           <i class="fa fa-star-o"></i>
+                                           <i class="fa fa-star-o"></i></p>
+          {% if recipe.prep_time %}
+            <b>Prep Time: </b>{{ recipe.prep_time }}
+          {% endif %}
+          {% if recipe.cooking_time %}
+            <b>Cooking Time: </b>{{ recipe.cooking_time }}
+          {% endif %}
+          {% if recipe.serves %}
+            <b>Serves/kg: </b> {{ recipe.serves }}
+          {% endif %}
+          </div>
+        </div>
+  </div>
+</div><hr>
+<div class="row">
+  <div class="col-md-6">
+    <h4>Ingredients</h4>
+    <p>{{ recipe.ingredients }}</p>
+  </div>
+  <div class="col-md-6">
+    <h4>Cooking Instructions</h4>
+    <p>{{ recipe.cooking_instructions }}</p>
+  </div>
+</div>
+<hr>
+<a href="#" data-toggle = "modal" data-target = "#myModal" class="btn btn-success"><i class="fa fa-star"></i> Rate</a>
+
+<!-- rate model -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form class="" action="" method="post">
+        {% csrf_token %}
+        <div class="modal-header">
+          <h4><i class="fa fa-star"></i> Rate</h4>
+        </div>
+        <div class="modal-body">
+          {{ form.as_p }}
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success"> Rate</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<br><br>
+{% endblock %}
